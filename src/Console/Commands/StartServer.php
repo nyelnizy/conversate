@@ -46,7 +46,7 @@ class StartServer extends Command
     {
         $port = $this->option("port");
         $secure = $this->option("secure");
-        require_once app_path("routes/actions.php");
+        require_once base_path("routes/actions.php");
         if($secure){
             $app = new \Ratchet\Http\HttpServer(
                 new \Ratchet\WebSocket\WsServer(
@@ -65,7 +65,7 @@ class StartServer extends Command
 
             $server = new \Ratchet\Server\IoServer($app, $wss, $loop);
             echo "Secure Mode...\n";
-            echo "Waiting for connections...\n";
+            echo "Waiting for connections on port $port...\n";
             $server->run();
         }else{
             $server = IoServer::factory(
@@ -77,7 +77,7 @@ class StartServer extends Command
                 $port
             );
             echo "Non Secure Mode...\n";
-            echo "Waiting for connections...\n";
+            echo "Waiting for connections on port $port...\n";
             $server->run();
         }
       return 0;
