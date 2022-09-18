@@ -2,6 +2,7 @@
 
 namespace Amot\Conversate;
 
+use Amot\Conversate\Console\Commands\StartServer;
 use Illuminate\Support\ServiceProvider;
 
 class ConversateServiceProvider extends ServiceProvider
@@ -20,8 +21,11 @@ class ConversateServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/conversate.php' => config_path('conversate.php'),
             ], 'conversate');
             $this->publishes([
-                __DIR__ . '/../src/routes/actions.php' => app_path('routes/actions.php')
+                __DIR__ . '/../src/routes/actions.php' => base_path('routes/actions.php')
             ], 'conversate');
+            $this->commands([
+                StartServer::class,
+            ]);
         }
     }
 
