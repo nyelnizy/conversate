@@ -1,0 +1,65 @@
+{
+    "name": "amot/conversate",
+    "description": "Your Package Description here",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+		"websockets",
+		"api",
+		"fast"
+	],
+    "authors": [
+        {
+            "name": "nyelnizy",
+            "email": "yhiamdan@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable":true,
+    "require-dev": {
+        "illuminate/support": "^9.30.1@dev",
+        "mockery/mockery": "^1.0@dev",
+        "orchestra/testbench": "^7.7",
+        "phpunit/phpunit": "^9.5.10@dev",
+        "symfony/thanks": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amot\\Conversate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amot\\Conversate\\Tests\\":"tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/thanks": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amot\\Conversate\\ConversateServiceProvider"
+            ],
+            "aliases": {
+                "Amot": "Conversate"
+            }
+        }
+    },
+    "require": {
+        "cboden/ratchet": "^0.4.4",
+        "lcobucci/jwt": "^4.1",
+        "php-ds/php-ds": "^1.4"
+    }
+}
