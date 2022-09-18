@@ -1,28 +1,38 @@
 # conversate
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Travis](https://img.shields.io/travis/amot/conversate.svg?style=flat-square)]()
-[![Total Downloads](https://img.shields.io/packagist/dt/amot/conversate.svg?style=flat-square)](https://packagist.org/packages/amot/conversate)
+[![Travis](https://img.shields.io/travis/hardcorp/hydra-client.svg?style=flat-square)]()
+[![Total Downloads](https://img.shields.io/packagist/dt/hardcorp/hydra-client.svg?style=flat-square)](https://packagist.org/packages/hardcorp/hydra-client)
+
+## Description
+
+A Laravel Library that enables RPC style communication over websockets.
 
 
 ## Install
-
+Add the following to composer.json file
 ```bash
-composer require amot/conversate
+    "repositories": [{
+            "type": "vcs",
+            "url": "git@github.com:nyelnizy/conversate.git"
+        }
+    ],
+```
+Add the dependency to require block
+```bash
+  "amot/conversate": "dev-master"
+```
+Run
+```bash
+  composer update
 ```
 
+## Publishing Files
 
-## Usage
-
-Write a few lines about the usage of this package.
-
-
-## Testing
-
-Run the tests with:
+Run:
 
 ```bash
-vendor/bin/phpunit
+php artisan vendor:publish --tag=conversate
 ```
 
 
