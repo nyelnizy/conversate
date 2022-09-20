@@ -31,6 +31,20 @@ php artisan vendor:publish --tag=conversate
 An actions.php file is published to the routes folder where you can find an example of how to define an action.
 A conversate.php config file is published to the config folder.
 
+## Config File
+Run:
+```bash
+return [
+    "ssl_cert" => "",
+    "ssl_key" => "",
+    "jwt" => [
+        "secret" => "",
+        "issuer" => "",
+        "audience" => "",
+        "ttl" => 30,
+    ]
+];
+```
 ## Starting Server
 Run:
 ```bash
