@@ -7,7 +7,7 @@ namespace Amot\Conversate\Tests\Unit;
 use Amot\Conversate\Event;
 use Ratchet\ConnectionInterface;
 
-class Conn implements ConnectionInterface
+class FakeConn implements ConnectionInterface
 {
     private $callback;
     function send($data)

@@ -18,7 +18,7 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
      */
     public function test_add_action()
     {
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUsers");
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUsers");
         $actions = \Amot\Conversate\Facades\Conversate::getApiActions();
         self::assertTrue(!empty($actions["get-users"]));
     }
@@ -30,16 +30,16 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
             assertTrue(!is_null($packet->conn));
             assertTrue($packet->payload === "Hello");
         });
-        $queue->push(new RequestPacket("Hello", new Conn()));
+        $queue->push(new RequestPacket("Hello", new FakeConn()));
         Event::signal("new-request");
     }
 
     public function test_received_request_is_processed_if_action_is_valid()
     {
         $queue = $GLOBALS['api_queue'] = new \Ds\Queue();
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUsers");
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUsers");
         new RequestConsumer();
-        $conn = new Conn();
+        $conn = new FakeConn();
         $conn->receiveData(function ($data){
             $d = json_decode($data)->data;
             assertTrue(count($d)===2);
@@ -60,9 +60,9 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
     public function test_received_request_is_rejected_if_action_is_not_found()
     {
         $queue = $GLOBALS['api_queue'] = new \Ds\Queue();
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUsers");
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUsers");
         new RequestConsumer();
-        $conn = new Conn();
+        $conn = new FakeConn();
         $conn->receiveData(function ($data){
             $d = json_decode($data)->code;
             assertTrue($d===404);
@@ -81,9 +81,9 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
     public function test_request_with_no_token_is_rejected_if_action_requires_auth()
     {
         $queue = $GLOBALS['api_queue'] = new \Ds\Queue();
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUsers",true);
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUsers",true);
         new RequestConsumer();
-        $conn = new Conn();
+        $conn = new FakeConn();
         $conn->receiveData(function ($data){
             $d = json_decode($data)->code;
             assertTrue($d===401);
@@ -112,9 +112,9 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
         $ts = new TokenService();
         $token = $ts->generateToken(1);
         $queue = $GLOBALS['api_queue'] = new \Ds\Queue();
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUsers",true);
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUsers",true);
         new RequestConsumer();
-        $conn = new Conn();
+        $conn = new FakeConn();
         $conn->receiveData(function ($data){
             $d = json_decode($data)->data;
             assertTrue(count($d)===2);
@@ -136,9 +136,9 @@ class ConversateTest extends \Orchestra\Testbench\TestCase
         $ts = new TokenService();
         $token = $ts->generateToken(1);
         $queue = $GLOBALS['api_queue'] = new \Ds\Queue();
-        \Amot\Conversate\Facades\Conversate::addAction("get-users", TestUserService::class, "getUserId",true);
+        \Amot\Conversate\Facades\Conversate::addAction("get-users", SampleUserService::class, "getUserId",true);
         new RequestConsumer();
-        $conn = new Conn();
+        $conn = new FakeConn();
         $conn->receiveData(function ($data){
             $d = json_decode($data)->data;
             assertTrue(intval($d)===1);
