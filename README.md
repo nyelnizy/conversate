@@ -1,13 +1,7 @@
 # conversate
-
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Travis](https://img.shields.io/travis/hardcorp/hydra-client.svg?style=flat-square)]()
-[![Total Downloads](https://img.shields.io/packagist/dt/hardcorp/hydra-client.svg?style=flat-square)](https://packagist.org/packages/hardcorp/hydra-client)
-
 ## Description
 
-A Laravel Library that enables RPC style communication over websockets.
-
+A Laravel Library that enables RPC style communication over web sockets.
 
 ## Install
 Add the following to composer.json file
@@ -34,13 +28,24 @@ Run:
 ```bash
 php artisan vendor:publish --tag=conversate
 ```
+An actions.php file is published to the routes folder where you can find an example of how to define an action.
+A conversate.php config file is published to the config folder.
 
+## Starting Server
+Run:
+```bash
+php artisan conversate:start
+```
+Run on specific port:
+```bash
+php artisan conversate:start --port=7001
+```
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-
+Run in secure/ssl mode:
+```bash
+php artisan conversate:start --secure
+```
+Please note that the path to your ssl key and cert must be provided in the conversate config file.
 ## Security
 
 If you discover any security-related issues, please email yhiamdan@gmail.com instead of using the issue tracker.
