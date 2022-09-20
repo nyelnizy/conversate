@@ -32,7 +32,7 @@ An actions.php file is published to the routes folder where you can find an exam
 A conversate.php config file is published to the config folder.
 
 ## Config File
-Run:
+Content:
 ```bash
 return [
     "ssl_cert" => "",
