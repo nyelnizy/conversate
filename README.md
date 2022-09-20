@@ -73,7 +73,7 @@ Method:
 ```bash
 public function getUsers(Request $request): ActionResult
 {
-    return $request->complete(Post::orderBy("created_at","desc")->get());
+    return $request->complete(User::all());
 }
 ```
 Request Data:
