@@ -48,14 +48,19 @@ php artisan conversate:start --secure
 Please note that the path to your ssl key and cert must be provided in the conversate config file.
 
 ## Defining an action
-Run:
+Import:
+```bash
+use Amot\Conversate\Facades\Conversate;
+```
+
+Add:
 ```bash
 Conversate::addAction('get-users',UsersService::class,'getUsers',true);
 ```
- Parameter 1 -> Action Name required
- Parameter 2 -> Class Path required
- Parameter 3 -> Method Name required
- Parameter 4 -> Requires Auth, default is false
+ Parameter 1 -> Action Name required, 
+ Parameter 2 -> Class Path required, 
+ Parameter 3 -> Method Name required, 
+ Parameter 4 -> Requires Auth, default is false.
  
 ## Sample UserService Implementation
 Import:
@@ -86,12 +91,10 @@ public function getUsers(Request $request): ActionResult
     $user_id = $request->user_id;
 }
 ```
-Please note user_id will only be set if action requires authentication
+Please note user_id will only be set if action requires authentication.
 
-## Security
-
-If you discover any security-related issues, please email yhiamdan@gmail.com instead of using the issue tracker.
-
+## The client
+Once all is set and running, the client can talk to the server. Link to client https://github.com/nyelnizy/conversate-client.git
 
 ## License
 
